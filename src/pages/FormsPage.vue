@@ -1,6 +1,6 @@
 <template>
   <h3>FormsPage</h3>
-
+  kk{{ myVar }}kk
   <q-page class="flex">
     <div class="q-pa-xs" v-for="item in items" :key="item.full_name">
       <single-repo v-bind="item"></single-repo>
@@ -14,7 +14,9 @@ import { useQuasar } from "quasar";
 import { Notify } from "quasar";
 
 import SingleRepo from "src/components/SingleRepo.vue";
-
+import { myVar } from "src/assets/data/lists.js";
+console.log("kkkk");
+console.log(lists);
 //Notify.create("Danger, Will Robinson! Danger!");
 
 export default defineComponent({
@@ -22,7 +24,7 @@ export default defineComponent({
   components: { SingleRepo },
 
   setup() {
-    var items = require("src/assets/topics/javascript.json");
+    var items = require("src/assets/data/javascript.json");
 
     return {
       items,
