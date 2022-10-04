@@ -1,6 +1,7 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <!-- <q-layout view="lHh Lpr lFf"> -->
+  <q-layout view="hHh LpR lFf">
+    <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-btn
           flat
@@ -11,13 +12,20 @@
           @click="toggleSideMenu"
         />
 
-        <q-toolbar-title>Awesome lists viewer</q-toolbar-title>
+        <q-toolbar-title>IT roles for you</q-toolbar-title>
 
-        <div></div>
+        <div><input v-model="text" placeholder="github username" /></div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="sideMenuOpen" show-if-above bordered>
+    <q-drawer
+      show-if-above
+      v-model="leftDrawerOpen"
+      side="left"
+      behavior="desktop"
+      width="180"
+      elevated
+    >
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
@@ -48,7 +56,11 @@ export default defineComponent({
   components: {
     EssentialLink,
   },
-
+  data() {
+    return {
+      message: "",
+    };
+  },
   setup() {
     const { sideMenuOpen, toggleSideMenu } = useUI();
 

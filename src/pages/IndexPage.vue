@@ -1,6 +1,8 @@
 <template>
   <q-page class="flex">
-    <h1>Flex.vue</h1>
+    <span class="text-h1">Introduce user</span>
+    Please, introduce the name of a github user (eg: octocat), to check the
+    results.
   </q-page>
 </template>
 

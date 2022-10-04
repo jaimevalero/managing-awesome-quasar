@@ -10,14 +10,14 @@ const routes = [
         component: () => import("src/pages/TypographyPage.vue"),
       },
       {
-        path: "flex",
-        name: "flex",
-        component: () => import("src/pages/FlexPage.vue"),
+        path: "users/:id",
+        name: "users",
+        component: () => import("src/pages/DialogsPage.vue"),
       },
       {
-        path: "dialogs",
-        name: "dialogs",
-        component: () => import("src/pages/DialogsPage.vue"),
+        path: "suggestions/:id",
+        name: "suggestions",
+        component: () => import("src/pages/SuggestionsPage.vue"),
       },
       {
         path: "forms",

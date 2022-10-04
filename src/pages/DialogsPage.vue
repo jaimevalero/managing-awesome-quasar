@@ -1,12 +1,11 @@
 <template>
-  <q-page class="q-pa-md">
-    <h1>DialogsPage.vue</h1>
-    <span class="h3">Dialogs</span>
-    <q-separator spaced />
-    <div class="q-pa-md q-gutter-sm">
-      <q-btn unelevated label="Alert" color="primary" @click="alert" />
-      <q-btn unelevated label="Confirm" color="primary" @click="confirm" />
-      <q-btn unelevated label="Prompt" color="primary" @click="prompt" />
+  <q-page class="q-pa-md no-padding">
+    <div
+      class="q-pa-xs no-padding"
+      v-for="item in categories"
+      :key="item.category"
+    >
+      <SingleCategory v-bind="item" />
     </div>
   </q-page>
 </template>
@@ -14,49 +13,47 @@
 <script>
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
+import axios from "axios";
+import SingleCategory from "src/components/SingleCategory.vue";
 
 export default defineComponent({
   name: "DialogsPage",
+  computed: {
+    login_normalized: function () {
+      var login;
+      try {
+        login = this.$router.currentRoute._value.params.id;
+        console.log(login);
+      } catch (error) {
+        console.log(error);
+        login = "borja";
+      }
+      return login;
+    },
+  },
+  components: { SingleCategory },
+  data() {
+    return {
+      categories: [],
+    };
+  },
+  created() {
+    console.log("0");
+
+    axios
+      .get(
+        "http://localhost:8888/v1/analize-user/?login=" + this.login_normalized
+      )
+      .then((response) => {
+        this.categories = response.data.categories;
+      })
+      .catch((e) => {
+        this.errors.push(e);
+      });
+  },
 
   setup() {
     const $q = useQuasar();
-
-    function alert() {
-      $q.dialog({
-        title: "Alert",
-        message: "Some message",
-      })
-        .onOk(() => {
-          // console.log('OK')
-        })
-        .onCancel(() => {
-          // console.log('Cancel')
-        })
-        .onDismiss(() => {
-          // console.log('I am triggered on both OK and Cancel')
-        });
-    }
-
-    function confirm() {
-      $q.dialog({
-        title: "Confirm",
-        message: "Would you like to turn on the wifi?",
-        cancel: true,
-        persistent: true,
-      })
-        .onOk(() => {
-          // console.log('>>>> OK')
-        })
-        .onOk(() => {
-          // console.log('>>>> second OK catcher')
-        })
-        .onCancel(() => {
-          // console.log('>>>> Cancel')
-        })
-        .onDismiss(() => {
-          // console.log('I am triggered on both OK and Cancel')
-        });
-    }
 
     function prompt() {
       $q.dialog({

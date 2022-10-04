@@ -1,32 +1,21 @@
 export const linksList = [
   {
-    title: "Forms",
-    caption: "Forms",
+    title: "IT Roles",
+    caption: "Categories and skills",
     icon: "lab la-wpforms",
-    link: "forms",
+    link: "users",
   },
   {
-    title: "Dialogs",
-    caption: "Diálogos",
-    icon: "las la-align-right",
-    link: "dialogs",
-  },
-  {
-    title: "Typography",
-    caption: "Tipos de letras",
-    icon: "las la-align-left",
-    link: "typography",
-  },
-  {
-    title: "Flex",
-    caption: "Estilos con flex",
-    icon: "las la-layer-group",
-    link: "flex",
-  },
-  {
-    title: "Docs",
-    caption: "quasar.dev",
+    title: "Suggestions",
+    caption: "which skill to learn",
     icon: "las la-graduation-cap",
+    link: "suggestions",
+  },
+
+  {
+    title: "About",
+    caption: "How the results are computed",
+    icon: "las la-info-circle",
     link: "https://quasar.dev",
   },
 ];
