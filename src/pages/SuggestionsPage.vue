@@ -3,7 +3,7 @@
     <span class="text-h2 col-12">Suggestions</span>
 
     <div class="container no-padding">
-      <span class="text-h6 col-12">Skills that you already have:</span>
+      <span class="text-h5 col-12">Skills that you already have:</span>
 
       <div class="row">
         <div
@@ -18,14 +18,18 @@
         </div>
       </div>
     </div>
-
-    <span class="text-h6 col-12">Skills that may learn:</span>
+  <br>
+    <span class="text-h5 col-12">Skills that you may learn:</span>
     <br />
     <div class="label bg-secondary text-white">
+      <span class="text-h6 col-12">
+      <i class="las la-info-circle"/>
+
       Skills that you do not know, with an estimation of how much your average
       market value would increase if you learn them.
+    </span>
     </div>
-
+    <br>
     <div
       class="q-pa-xs"
       v-for="item in skills_to_learn_normalized"
@@ -91,7 +95,7 @@ export default defineComponent({
 
     axios
       .get(
-        "http://localhost:8888/v1/analize-user/?login=" + this.login_normalized
+        "http://localhost:8888/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
       )
       .then((response) => {
         var my_values_to_learn_normalized = [];
@@ -140,8 +144,10 @@ export default defineComponent({
 <style>
 .dolars {
   color: gold;
-  margin-left: 12px;
+  margin-right: 12px;
   text-align: right;
+  border-radius: 2px;
+  font-size: 20px;
 }
 .topic-tag {
   display: inline-block;

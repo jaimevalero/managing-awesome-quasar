@@ -14,7 +14,16 @@
 
         <q-toolbar-title>IT roles for you</q-toolbar-title>
 
-        <div><input v-model="text" placeholder="github username" /></div>
+
+        <div class="flex">
+          <q-form   v-on:click="changeFormAction" >
+
+            <input id="text-search" placeholder="github username"  v-model="store.vital" />
+            <q-btn icon="las la-search" label="Search" type="submit" color="secondary"/>
+          </q-form>
+
+        </div>
+
       </q-toolbar>
     </q-header>
 
@@ -49,6 +58,7 @@ import { linksList } from "src/assets/link-list";
 import { defineComponent } from "vue";
 
 import useUI from "../composables/useUI";
+var store = {vital:''};
 
 export default defineComponent({
   name: "MainLayout",
@@ -59,7 +69,17 @@ export default defineComponent({
   data() {
     return {
       message: "",
+      store : store
     };
+  },
+  methods: {
+    changeFormAction:  function() {
+      console.log(window.location.href);
+      console.log(this.$router);
+      console.log("ruta0");
+      console.log(this.$router.currentRoute);
+      this.$router.push({ name: 'users', params: { "id": this.store.vital } })
+    }
   },
   setup() {
     const { sideMenuOpen, toggleSideMenu } = useUI();
@@ -70,5 +90,12 @@ export default defineComponent({
       sideMenuOpen,
     };
   },
+
 });
 </script>
+
+<style scoped>
+.q-btn {
+  margin-left: 15px;
+}
+</style>

@@ -5,7 +5,7 @@
         <span class="text-h3">{{ category_normalized }}</span>
       </div>
       <div class="col-grow q-pa-sm titulo-categoria">
-        <span class="text-4">{{ salary_normalized }}</span>
+        <span class="text-4 dolars">{{ salary_normalized }}</span>
       </div>
     </div>
     <div class="container no-padding">
@@ -140,7 +140,13 @@ h5 {
   border-radius: 2px;
   color: #0366d6;
 }
-
+.dolars {
+  color: gold;
+  margin-right: 12px;
+  text-align: right;
+  border-radius: 2px;
+  font-size: 20px;
+}
 .titulo-categoria {
   min-height: 10px;
   max-height: 60px;
