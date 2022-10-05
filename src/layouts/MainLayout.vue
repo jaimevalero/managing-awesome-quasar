@@ -2,6 +2,7 @@
   <!-- <q-layout view="lHh Lpr lFf"> -->
   <q-layout view="hHh LpR lFf">
     <q-header elevated class="bg-primary text-white">
+
       <q-toolbar>
         <q-btn
           flat
@@ -11,6 +12,14 @@
           aria-label="Menu"
           @click="toggleSideMenu"
         />
+
+        <!-- <a href="">
+    <q-img
+      src="https://lamby.custominktech.com/assets/github-white-d730bb8cb18839116dcbd219f33f6e7b1cd43633e0fbaa3c2a39c12ccd56a164.png"
+      spinner-color="white"
+      style="height: 30px; max-width: 30px"
+    />
+  </a> -->
 
         <q-toolbar-title>IT roles for you</q-toolbar-title>
 
