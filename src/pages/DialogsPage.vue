@@ -1,13 +1,15 @@
 <template>
   <q-page class="q-pa-md no-padding">
 
-    <q-intersection
-      class="q-pa-xs no-padding"
-      v-for="item in categories"
-      :key="item.category"
-    >
-      <SingleCategory v-bind="item" />
-    </q-intersection>
+    <q-list bordered class="rounded-borders">
+      <q-intersection
+        class="q-pa-xs no-padding"
+        v-for="item in categories"
+        :key="item.category"
+      >
+        <SingleCategory v-bind="item" />
+      </q-intersection>
+   </q-list>
   </q-page>
 </template>
 

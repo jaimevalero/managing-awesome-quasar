@@ -1,22 +1,21 @@
 <template>
   <div class="container no-padding">
 
-    <q-list bordered class="rounded-borders">
       <q-expansion-item
         dense-toggle
         expand-separator
         :label="category_percentage_normalized"
-        :caption="salary_normalized"
+        :caption="salary_title"
       >
 
-                  <q-card>
+        <q-card>
           <q-card-section>
             <div class="row flex-center q-pt-none q-pd-none">
       <div class="col-10 q-pa-sm titulo-categoria">
         <span class="text-h3">{{ category_normalized }}</span>
       </div>
       <div class="col-grow q-pa-sm titulo-categoria visible" title="Average salary for this category">
-        <span class="text-4 dolars">Salary: {{ salary_normalized }}</span>
+        <span class="text-4 dolars">{{ salary_normalized }}</span>
       </div>
     </div>
     <div class="container no-padding">
@@ -66,7 +65,6 @@
           </q-card-section>
         </q-card>
       </q-expansion-item>
-      </q-list>
 
 
   </div>
@@ -114,6 +112,10 @@ export default defineComponent({
     },
     salary_normalized: function () {
       return "$" + this.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    salary_title: function () {
+      const salary_thousand = Math.ceil(this.salary / 1000 );
+      return "Salary: " + salary_thousand.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"k $";
     },
     category_percentage_normalized: function () {
       return this.category.replaceAll("+", " ") + " (" + parseFloat(this.ownership * 100).toFixed(0) + "%)";
