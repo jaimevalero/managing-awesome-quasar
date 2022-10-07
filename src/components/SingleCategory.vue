@@ -12,7 +12,7 @@
           <q-card-section>
             <div class="row flex-center q-pt-none q-pd-none">
       <div class="col-10 q-pa-sm titulo-categoria">
-        <span class="text-h3">{{ category_normalized }}</span>
+        <span class="text-h3 visible" title="Category">{{ category_normalized }}</span>
       </div>
       <div class="col-grow q-pa-sm titulo-categoria visible" title="Average salary for this category">
         <span class="text-4 dolars">{{ salary_normalized }}</span>
