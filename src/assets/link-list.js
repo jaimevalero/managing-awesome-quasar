@@ -7,7 +7,7 @@ export const linksList = [
   },
   {
     title: "Suggestions",
-    caption: "which skill to learn",
+    caption: "Which skill to learn",
     icon: "las la-graduation-cap",
     link: "suggestions",
   },
@@ -16,6 +16,6 @@ export const linksList = [
     title: "About",
     caption: "How the results are computed",
     icon: "las la-info-circle",
-    link: "https://quasar.dev",
+    link: "about",
   },
 ];

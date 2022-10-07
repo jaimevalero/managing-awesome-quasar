@@ -6,7 +6,7 @@
       <span class="text-h5 col-12">Skills that you already have:</span>
 
       <div class="row">
-        <div
+        <q-intersection
           class="col-auto"
           v-for="item in skills_learned_normalized"
           :key="item"
@@ -15,7 +15,7 @@
           <q-badge class="topic-tag">
             {{ item }}
           </q-badge>
-        </div>
+        </q-intersection>
       </div>
     </div>
   <br>
@@ -95,9 +95,9 @@ export default defineComponent({
 
     axios
       .get(
-        //"http://127.0.0.1:8888/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
+        "http://127.0.0.1:8888/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
 
-        "https://epg-estudio-orga.apps.ocp-epg.tid.es/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
+        //"https://epg-estudio-orga.apps.ocp-epg.tid.es/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
         )
       .then((response) => {
         var my_values_to_learn_normalized = [];
@@ -119,7 +119,7 @@ export default defineComponent({
         for (const [key, value] of Object.entries(
           response.data.skills_to_learn
         )) {
-          if (i <= 15) {
+          if (i <= 12) {
             i++;
             my_values_to_learn_normalized.push({
               id: key,
@@ -159,5 +159,8 @@ export default defineComponent({
   background-color: #f1f8ff;
   border-radius: 2px;
   color: #0366d6;
+}
+q-linear-progress {
+  color: blue-10;
 }
 </style>

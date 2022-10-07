@@ -4,26 +4,28 @@
       <div class="col-10 q-pa-sm titulo-categoria">
         <span class="text-h3">{{ category_normalized }}</span>
       </div>
-      <div class="col-grow q-pa-sm titulo-categoria">
+      <div class="col-grow q-pa-sm titulo-categoria visible" title="Average salary for this category">
         <span class="text-4 dolars">{{ salary_normalized }}</span>
       </div>
     </div>
     <div class="container no-padding">
       <div class="row no-padding items-center">
+
         <div class="col-10">
-          <q-linear-progress
+          <q-linear-progress  title="Percentage of skill for this category that you already own"
             :label="percentage"
             :value="ownership"
           ></q-linear-progress>
         </div>
         <div class="col-1 justify-right q-pa-sm percent">
-          <span class="text-5" percent justify-right>{{ percentage }}</span>
+          <span class="text-5 visible percent"  justify-right title="Percentage of skill for this category that you already own">
+            {{ percentage }}</span>
         </div>
       </div>
     </div>
 
     <div class="container no-padding">
-      <h6>Skills that you already have:</h6>
+      <h6>Skills for {{category_normalized}} that you already own:</h6>
 
       <div class="row">
         <div
@@ -37,10 +39,11 @@
           </q-badge>
         </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-12">
-          <h6>Skills that you do not have:</h6>
+        <div class="col-xs-12 col-sm-6 col-md-12" title="Skills that you do not own, but users in this cagerory do." >
+          <h6>Skills for {{category_normalized}} that you do not have:</h6>
           <q-card>
             <apex-donut
+
               :skills="skills_not_owned"
               :series="skill_not_owner_values"
             />
@@ -131,6 +134,15 @@ h4 text-4 {
 h5 {
   text-align: right;
 }
+text-5 .percent{
+  color: blue-10;
+}
+.percent{
+  color: blue-10;
+}
+q-linear-progress {
+  color: blue-10;
+}
 .topic-tag {
   display: inline-block;
   padding: 0.2em 0.2em;
@@ -147,8 +159,15 @@ h5 {
   border-radius: 2px;
   font-size: 20px;
 }
+.q-linear-progress {
+  min-height: 10px;
+}
 .titulo-categoria {
   min-height: 10px;
   max-height: 60px;
+}
+.visible {
+  height: 3em;
+  width: 10em;
 }
 </style>
