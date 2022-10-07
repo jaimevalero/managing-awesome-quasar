@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md no-padding">
     <span class="text-h2 col-12">IT Roles</span><br>
-      <span class="text-h5 col-12">Please select an IT position to check if you current github profile fits in:</span>
+      <span class="text-h5 col-12">Please, select an IT position to check how much you current github profile fits in:</span>
 
     <q-list bordered class="rounded-borders">
       <q-intersection
