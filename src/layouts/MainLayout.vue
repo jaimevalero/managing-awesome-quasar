@@ -21,7 +21,11 @@
     />
   </a> -->
 
-        <q-toolbar-title>IT roles for you</q-toolbar-title>
+        <q-toolbar-title>
+          <router-link to="/" class="text-white text-bold" style="text-decoration: none;">
+          IT roles for you
+          </router-link>
+          </q-toolbar-title>
 
 
         <div class="flex">
