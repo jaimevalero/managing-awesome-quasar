@@ -1,18 +1,29 @@
 <template>
   <div class="container no-padding">
-    <div class="row flex-center q-pt-none q-pd-none">
+
+    <q-list bordered class="rounded-borders">
+      <q-expansion-item
+        dense-toggle
+        expand-separator
+        :label="category_percentage_normalized"
+        :caption="salary_normalized"
+      >
+
+                  <q-card>
+          <q-card-section>
+            <div class="row flex-center q-pt-none q-pd-none">
       <div class="col-10 q-pa-sm titulo-categoria">
         <span class="text-h3">{{ category_normalized }}</span>
       </div>
       <div class="col-grow q-pa-sm titulo-categoria visible" title="Average salary for this category">
-        <span class="text-4 dolars">{{ salary_normalized }}</span>
+        <span class="text-4 dolars">Salary: {{ salary_normalized }}</span>
       </div>
     </div>
     <div class="container no-padding">
       <div class="row no-padding items-center">
 
         <div class="col-10">
-          <q-linear-progress  title="Percentage of skill for this category that you already own"
+          <q-linear-progress  title="Percentage of skills for this category that you already own"
             :label="percentage"
             :value="ownership"
           ></q-linear-progress>
@@ -25,7 +36,7 @@
     </div>
 
     <div class="container no-padding">
-      <h6>Skills for {{category_normalized}} that you already own:</h6>
+      <h6>Skills for role "{{category_normalized}}"" that you already own:</h6>
 
       <div class="row">
         <div
@@ -40,7 +51,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-12" title="Skills that you do not own, but users in this cagerory do." >
-          <h6>Skills for {{category_normalized}} that you do not have:</h6>
+          <h6>Skills for role "{{category_normalized}}"" that you do not have:</h6>
           <q-card>
             <apex-donut
 
@@ -51,6 +62,13 @@
         </div>
       </div>
     </div>
+
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
+      </q-list>
+
+
   </div>
 </template>
 
@@ -96,6 +114,9 @@ export default defineComponent({
     },
     salary_normalized: function () {
       return "$" + this.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    category_percentage_normalized: function () {
+      return this.category.replaceAll("+", " ") + " (" + parseFloat(this.ownership * 100).toFixed(0) + "%)";
     },
     skill_not_owner_values: function () {
       var my_values = [];

@@ -4,9 +4,7 @@
 
     Welcome to the analyzer of IT roles.<br>
 
-
-
-    ddPlease, introduce the name of a github user (eg: octocat), to check the
+    Please, introduce the name of a github user (eg: octocat), to check the
     results.
 
 
