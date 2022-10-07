@@ -25,9 +25,9 @@
 
 
         <div class="flex">
-          <q-form   v-on:click="changeFormAction" >
+          <q-form   v-on:submit="changeFormAction" >
 
-            <input id="text-search" placeholder="github username"  v-model="store.vital" />
+            <input id="text-search"   placeholder="github username"  v-model="store.vital" />
             <q-btn icon="las la-search" label="Search" type="submit" color="secondary"/>
           </q-form>
 
@@ -81,9 +81,13 @@ export default defineComponent({
   },
   methods: {
     changeFormAction:  function() {
-      console.log(window.location.href);
-      console.log(this.$router);
       console.log("ruta0");
+      console.log(window.location.href);
+      console.log("ruta1");
+      console.log(this.store.vital);
+      console.log("ruta2");
+      console.log(this.$router);
+      console.log("ruta3");
       console.log(this.$router.currentRoute);
       this.$router.push({ name: 'users', params: { "id": this.store.vital } })
     }

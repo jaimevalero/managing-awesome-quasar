@@ -27,6 +27,9 @@ export default defineComponent({
     login_normalized: function () {
       var login;
       try {
+        console.log("nos llega");
+        console.log(this.id);
+        console.log(this.$router.currentRoute._value.params.id);
         login = this.$router.currentRoute._value.params.id;
         console.log(login);
       } catch (error) {
