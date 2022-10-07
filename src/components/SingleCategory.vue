@@ -8,6 +8,8 @@
         :caption="salary_title"
       >
 
+
+
         <q-card>
           <q-card-section>
             <div class="row flex-center q-pt-none q-pd-none">
@@ -16,6 +18,7 @@
       </div>
       <div class="col-grow q-pa-sm titulo-categoria visible" title="Average salary for this category">
         <span class="text-4 dolars">{{ salary_normalized }}</span>
+
       </div>
     </div>
     <div class="container no-padding">
