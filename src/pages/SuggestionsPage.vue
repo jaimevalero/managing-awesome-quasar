@@ -95,9 +95,9 @@ export default defineComponent({
 
     axios
       .get(
-        "http://127.0.0.1:8888/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
+        //"http://127.0.0.1:8888/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
 
-        //"https://epg-estudio-orga.apps.ocp-epg.tid.es/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
+        "https://epg-estudio-orga.apps.ocp-epg.tid.es/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
         )
       .then((response) => {
         var my_values_to_learn_normalized = [];
