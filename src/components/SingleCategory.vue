@@ -47,9 +47,11 @@
           :key="item.category"
           :href="`https://jaimevalero.github.io/managing-awesome-lists/var/topics/-${item.category}`"
         >
-          <q-badge class="topic-tag">
+          <q-badge class="topic-tag label-danger"     >
             {{ item }}
           </q-badge>
+
+
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-12" title="Skills that you do not own, but users in this cagerory do." >

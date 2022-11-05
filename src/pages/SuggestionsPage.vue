@@ -12,9 +12,12 @@
           :key="item"
           :href="`https://jaimevalero.github.io/managing-awesome-lists/var/topics/-${item}`"
         >
-          <q-badge class="topic-tag">
+          <!-- <q-badge class="topic-tag">
             {{ item }}
-          </q-badge>
+          </q-badge> -->
+          <q-chip  class="topic-tag" removable @remove="remove_skill(item)"  >
+            {{ item }}
+        </q-chip>
         </q-intersection>
       </div>
     </div>
@@ -69,6 +72,10 @@ export default defineComponent({
     return {
       toggleSideMenu,
       sideMenuOpen,
+      remove_skill (item) {
+        console.log(`${item} has been removed`)
+        console.log(this.skills_learned_normalized)
+      },
     };
   },
   computed: {
@@ -84,10 +91,12 @@ export default defineComponent({
       return login;
     },
   },
+
   data() {
     return {
       skills_to_learn_normalized: [],
       skills_learned_normalized: [],
+      skill_unselected_by_user: []
     };
   },
   created() {
@@ -95,9 +104,9 @@ export default defineComponent({
 
     axios
       .get(
-        //"http://127.0.0.1:8888/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
+        "http://127.0.0.1:8888/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
 
-        "https://epg-estudio-orga.apps.ocp-epg.tid.es/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
+        //"https://epg-estudio-orga.apps.ocp-epg.tid.es/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
         )
       .then((response) => {
         var my_values_to_learn_normalized = [];
@@ -151,15 +160,16 @@ export default defineComponent({
   border-radius: 2px;
   font-size: 20px;
 }
-.topic-tag {
+.topic-tag  {
   display: inline-block;
-  padding: 0.2em 0.2em;
-  margin: 0 0.3em 0.3em 0;
+  padding: 0.4em 0.4em;
+  margin: 0 0.6em 0.6em 0;
   white-space: nowrap;
   background-color: #f1f8ff;
   border-radius: 2px;
   color: #0366d6;
 }
+
 q-linear-progress {
   color: blue-10;
 }

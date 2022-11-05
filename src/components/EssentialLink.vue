@@ -45,6 +45,8 @@ export default defineComponent({
         if (props.link.startsWith("http")) {
           return window.open(props.link, "_blank");
         }
+        console.log("EssentialLink")
+        console.log(this)
         router.push({ name: props.link });
       },
     };
