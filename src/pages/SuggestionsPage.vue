@@ -7,19 +7,28 @@
 
       <div class="row">
         <q-intersection
+
           class="col-auto"
-          v-for="item in skills_learned_normalized"
+          v-for="item in skills_learned_normalized_all"
           :key="item"
-          :href="`https://jaimevalero.github.io/managing-awesome-lists/var/topics/-${item}`"
+          :href="`https://jaimevalero.github.io/managing-awesome-lists/var/topics/${item}`"
         >
           <!-- <q-badge class="topic-tag">
             {{ item }}
           </q-badge> -->
-          <q-chip  class="topic-tag" removable @remove="remove_skill(item)"  >
-            {{ item }}
-        </q-chip>
+          <q-checkbox
+          v-bind:id="item"
+          v-bind:val="item"
+          v-model="skills_learned_normalized"
+          @click="remove_skill">
+        <q-label >{{item}}</q-label>
+      </q-checkbox>
+
         </q-intersection>
+
       </div>
+      <!-- <br><br> -->
+        <!-- <span>Checked names: {{ skills_learned_normalized }}</span> -->
     </div>
   <br>
     <span class="text-h5 col-12">Skills that you may learn:</span>
@@ -64,25 +73,82 @@
 import { defineComponent } from "vue";
 import useUI from "../composables/useUI";
 import axios from "axios";
+var qs = require('qs');
+
+
+
+function askBackend(response) {
+  var my_values_to_learn_normalized=[];
+  var i=0;
+  let maxKey, maxValue=0;
+
+  for(const [key, value] of Object.entries(
+    response.data.skills_to_learn
+  )) {
+    if(value>maxValue) {
+      maxValue=value;
+      maxKey=key;
+    }
+  }
+  for(const [key, value] of Object.entries(
+    response.data.skills_to_learn
+  )) {
+    if(i<=12) {
+      i++;
+      my_values_to_learn_normalized.push({
+        id: key,
+        value: value,
+        value_normalized: value/maxValue,
+        dolars: "$"+
+          Math.ceil(value)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      });
+    }
+  }
+  return my_values_to_learn_normalized;
+}
 export default defineComponent({
   name: "SuggestionsPage",
-  setup() {
+  setup(props, context) {
     const { sideMenuOpen, toggleSideMenu } = useUI();
 
     return {
       toggleSideMenu,
       sideMenuOpen,
-      remove_skill (item) {
-        console.log(`${item} has been removed`)
-        console.log(this.skills_learned_normalized)
-      },
+
     };
+  },
+  methods : {
+    remove_skill() {
+        const a = 0;
+        var ignored_skills =  this.skills_learned_normalized_all.concat(this.skills_learned_normalized).filter(item => !this.skills_learned_normalized_all.includes(item) || !this.skills_learned_normalized.includes(item))
+        axios.get(
+          //'http://127.0.0.1:8888/v1/analize-user/', {
+            "https://epg-estudio-orga.apps.ocp-epg.tid.es/v1/analize-user/", {
+          params: {
+            token: "fb1d3b71-2c1e-49cb-b04b-46534534ef0a",
+            login : this.login_normalized ,
+            ignored_skills:  ignored_skills
+          },
+          paramsSerializer: params => {
+            return qs.stringify(params)
+          }
+        }).then((response) => {
+              var my_values_to_learn_normalized=askBackend(response);
+              this.skills_learned_normalized = Object.keys(
+                response.data.skills_already_learned
+              );
+              this.skills_to_learn_normalized = my_values_to_learn_normalized;
+            });
+
+      }
   },
   computed: {
     login_normalized: function () {
       var login;
       try {
-        login = this.$router.currentRoute._value.params.id;
+        login = this.$router.currentRoute.value.params.id;
         //console.log(login);
       } catch (error) {
         console.log(error);
@@ -96,57 +162,25 @@ export default defineComponent({
     return {
       skills_to_learn_normalized: [],
       skills_learned_normalized: [],
-      skill_unselected_by_user: []
+      skills_learned_normalized_all: [],
+      skills_unselected_by_user: []
     };
   },
   created() {
-    //console.log("0");
-
     axios
       .get(
-        "http://127.0.0.1:8888/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
-
-        //"https://epg-estudio-orga.apps.ocp-epg.tid.es/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
+        //"http://127.0.0.1:8888/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
+        "https://epg-estudio-orga.apps.ocp-epg.tid.es/v1/analize-user/?token=fb1d3b71-2c1e-49cb-b04b-46534534ef0a&login=" + this.login_normalized
         )
       .then((response) => {
-        var my_values_to_learn_normalized = [];
-        var i = 0;
-        let maxKey,
-          maxValue = 0;
-
-        for (const [key, value] of Object.entries(
-          response.data.skills_to_learn
-        )) {
-          if (value > maxValue) {
-            maxValue = value;
-            maxKey = key;
-          }
-        }
-
-        console.log("maxValue: ");
-        console.log(maxValue);
-        for (const [key, value] of Object.entries(
-          response.data.skills_to_learn
-        )) {
-          if (i <= 12) {
-            i++;
-            my_values_to_learn_normalized.push({
-              id: key,
-              value: value,
-              value_normalized: value / maxValue,
-              dolars:
-                "$" +
-                Math.ceil(value)
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-            });
-          }
-        }
+        var my_values_to_learn_normalized=askBackend(response);
         this.skills_learned_normalized = Object.keys(
           response.data.skills_already_learned
         );
+        this.skills_learned_normalized_all = Object.keys(
+          response.data.skills_already_learned
+        );
         this.skills_to_learn_normalized = my_values_to_learn_normalized;
-        console.log(this.skills_to_learn_normalized);
       });
   },
 });
@@ -174,3 +208,5 @@ q-linear-progress {
   color: blue-10;
 }
 </style>
+
+
