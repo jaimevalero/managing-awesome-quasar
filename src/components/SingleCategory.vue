@@ -171,13 +171,13 @@ text-5 .percent{
 q-linear-progress {
   color: blue-10;
 }
-.topic-tag {
+.topic-tag  {
+  border-radius: 16px ;
   display: inline-block;
-  padding: 0.2em 0.2em;
-  margin: 0 0.3em 0.3em 0;
+  padding: 0.4em 0.4em;
+  margin: 0 0.6em 0.6em 0;
   white-space: nowrap;
   background-color: #f1f8ff;
-  border-radius: 2px;
   color: #0366d6;
 }
 .dolars {

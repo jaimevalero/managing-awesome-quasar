@@ -13,17 +13,16 @@
           :key="item"
           :href="`https://jaimevalero.github.io/managing-awesome-lists/var/topics/${item}`"
         >
-          <!-- <q-badge class="topic-tag">
-            {{ item }}
-          </q-badge> -->
+
           <q-checkbox
           v-bind:id="item"
           v-bind:val="item"
           v-model="skills_learned_normalized"
           @click="remove_skill">
-        <q-label >{{item}}</q-label>
-      </q-checkbox>
 
+
+      <q-label  class="topic-tag">{{item}}</q-label>
+    </q-checkbox>
         </q-intersection>
 
       </div>
@@ -58,10 +57,10 @@
               style="max-height: 100px"
             ></q-linear-progress>
           </div>
-          <div class="col-3 percent">
-            <span class="text-6 justify-center topic-tag">{{ item.id }}</span>
+          <div class="col-3 percent" >
+            <span class="text-6 justify-center topic-tag" >{{ item.id }}</span>
+            <span class="text-5 justify-right dolars" >{{ item.dolars }} </span>
 
-            <span class="text-5 justify-right dolars">{{ item.dolars }} </span>
           </div>
         </div>
       </div>
@@ -195,12 +194,12 @@ export default defineComponent({
   font-size: 20px;
 }
 .topic-tag  {
+  border-radius: 16px ;
   display: inline-block;
   padding: 0.4em 0.4em;
   margin: 0 0.6em 0.6em 0;
   white-space: nowrap;
   background-color: #f1f8ff;
-  border-radius: 2px;
   color: #0366d6;
 }
 
